@@ -1,0 +1,59 @@
+Git
+
+Git email configuration commands
+	git config --global user.name "Your Name"
+	git config --global user.email you@example.com
+
+Common Git commands
+	git init (To initiate a git repository)
+	git status
+	git add file.extension
+	git add . (To add all files)
+	git restore --staged file.xyz (To remove added file without committing)
+	git commit -m "Message for committing"
+	git log (To view changes made)
+	git reset <commit hash ID> (To delete all the commits before the hash commit)
+		(The deleted commits are in the unstaged area)
+	git stash (To stash all the changes made after reseting to backstage area)
+	git stash pop (Backstage area changes to reappear)
+	git remote add origin <url> (To add remote repo to local)
+	git push -u <url name:origin> <branch>
+
+
+	
+Git Branches
+
+	git branch <name of new branch> (To create new branch)
+	git checkout <name of the branch to commit to> (To select that branch to commit to)
+	git merge <name of branch to be merged to main folder> (To merge the selected branch to main branch.Go to the branch you wanna merge it to ie. main by checkout)
+	#note: you can push different branches separately. Ex:This branch is 1 commit ahead of main. 
+	#note: commit c78 (HEAD -> feature, origin/feature) indicates the brach is added to the online repo named origin. 
+git checkout main    
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+                                                                                  
+git log          
+commit 2a (HEAD -> main, origin/main)
+
+	git remote -v (To list all links accessible)
+	git remote add upstream <url to public repo from whre i have forked>
+		origin: Personal
+		upstream: Online
+	git clone <url>
+	#notes  git clone: Creates a local copy of a remote repository and sets up origin.
+		git remote add upstream: Adds a new remote repository (typically the original repository in the context of a fork) to an existing local repository for syncing purposes.
+		Never commit on main branch: IF a branch already has a pull request associated with it, it will not allow you to create a new pull request. The commits will be added to the same pull request.1 pull request= 1 branch. 
+	
+	
+	git rebase main  (git rebase current branch to main, the main remains where is was and the branch head adds below the main:: do git switch main; git rebase branch_name;)
+	
+	git branch -f <brach_name> <commit_hash_or_rel_ref>  (cant do when working on the same branch, switch to another and try)....(move the head using --detach at the end of command like git switch main^^^ --detach; HEAD is now at b782c4d c1)
+	
+	
+	git reset <commit_hash or rel_ref>  (reverses changes by moving a branch reference backwards in time to an older commit. In this sense you can think of it as "rewriting history;" git reset will move a branch backwards as if the commit had never been made in the first place.)
+	
+	
+	git revert <commit_hash or rel_ref>
+
+While resetting works great for local branches on your own machine, its method of "rewriting history" doesn't work for remote branches that others are using.
+In order to reverse changes and share those reversed changes with others, we need to use git revert. Let's see it in action.Weird, a new commit plopped down below the commit we wanted to reverse. That's because this new commit C2' introduces changes -- it just happens to introduce changes that exactly reverses the commit of C2.With reverting, you can push out your changes to share with others.
